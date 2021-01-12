@@ -18,10 +18,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('paises', \App\Http\Controllers\API\PaisController::class)->except(['store', 'destroy']);
+Route::resource('paises', \App\Http\Controllers\API\PaisController::class)
+    ->except(['store', 'destroy']);
 
-Route::resource('municipios.localidades', \App\Http\Controllers\API\LocalidadController::class)->shallow();
+Route::resource('provincias', \App\Http\Controllers\API\ProvinciaController::class)
+    ->only(['index', 'show']);
 
-Route::get('municipios', [\App\Http\Controllers\API\MunicipioController::class, 'index']);
+Route::resource('provincias.municipios', \App\Http\Controllers\API\MunicipioController::class)
+    ->only(['index', 'show'])
+    ->shallow();
 
-Route::get('municipios/{id}', [\App\Http\Controllers\API\MunicipioController::class, 'show']);
+Route::resource('municipios.localidades', \App\Http\Controllers\API\LocalidadController::class)
+    ->shallow();

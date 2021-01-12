@@ -13,9 +13,10 @@ class MunicipioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($provinciaId)
     {
        $municipios = DB::table('municipio')
+           ->where(['provincia_id' => $provinciaId])
            ->select('*')
            ->get();
        return response()->json($municipios);
