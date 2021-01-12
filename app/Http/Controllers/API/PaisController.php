@@ -17,7 +17,7 @@ class PaisController extends Controller
     public function index()
     {
         $paises = DB::select('select * from pais');
-        return response()->json(utf8_decode($paises[0]['nombre']));
+        return response()->json($paises);
     }
 
     /**
